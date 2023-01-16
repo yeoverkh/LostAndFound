@@ -4,6 +4,11 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Class that represents type of lost item.
+ * A lot of items may have one type.
+ * Every item must have only one type.
+ */
 @Entity
 @Table(name = "typ")
 public class Type {

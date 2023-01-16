@@ -8,6 +8,11 @@ import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Class that represents peculiarities of lost items.
+ * Some peculiarities may be applied for a lot of items.
+ * Some items may have a lot of peculiarities.
+ */
 @Entity
 public class Peculiarities {
 

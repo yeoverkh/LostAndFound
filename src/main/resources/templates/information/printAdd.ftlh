@@ -5,7 +5,7 @@
     <h2>${lostItem.getName()} was added to lost and found!</h2>
 
     <#if lostItem.getFilename()??>
-        <img class="img-fluid rounded-start" style="max-width: 400px" src="/img/${lostItem.getFilename()}">
+        <img class="img-fluid rounded-start" style="max-width: 400px" src="/img/${lostItem.getFilename()}"/>
     </#if>
 
     <h3>Type: ${lostItem.getType().getName()}</h3>
@@ -23,5 +23,5 @@
     <br/>
     <br/>
 
-    <input class="btn btn-info d-print-none" type="button" value="Print" onclick="print()">
+    <input class="btn btn-info d-print-none" type="button" value="Print" onclick="print()"/>
 </@c.page>

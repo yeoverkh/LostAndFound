@@ -20,19 +20,42 @@ import java.io.IOException;
 import java.sql.Date;
 import java.util.UUID;
 
+/**
+ * Controller for all mappings that works with items.
+ */
 @Controller
 @RequestMapping("/main")
 public class MainController {
 
+    /**
+     * Service that works with lost items.
+     */
     private final LostItemService lostItemService;
+
+    /**
+     * Service that works with places.
+     */
     private final PlaceService placeService;
+
+    /**
+     * Service that works with types.
+     */
     private final TypeService typeService;
+
+    /**
+     * Service that works with assessed values.
+     */
     private final AssessedValueService assessedValueService;
 
+    /**
+     * Takes images from this upload path.
+     */
     @Value("${upload.path}")
     private String uploadPath;
 
-
+    /**
+     * Default constructor that auto wires dependencies.
+     */
     public MainController(LostItemService lostItemService, PlaceService placeService, TypeService typeService, AssessedValueService assessedValueService) {
 
         this.lostItemService = lostItemService;
@@ -41,6 +64,10 @@ public class MainController {
         this.assessedValueService = assessedValueService;
     }
 
+    /**
+     * Shows all lost items.
+     * @return main page with all lost items.
+     */
     @GetMapping
     public String main(Model model) {
 
@@ -49,6 +76,10 @@ public class MainController {
         return "item/main";
     }
 
+    /**
+     * Redirects on page to add new item.
+     * @return page with input fields to add new item.
+     */
     @GetMapping("/add")
     public String addItem(Model model) {
 
@@ -59,11 +90,37 @@ public class MainController {
         return "item/addItem";
     }
 
+    /**
+     * Adds new lost item.
+     * @param lostItem lost item that creates from input fields.
+     * @param place input Long id of lost item place.
+     * @param type input Long id of lost item type.
+     * @param assessedValue input Long id of lost item assessed value.
+     * @param file input image that belongs to lost item.
+     * @param stringTime input String time when lost item was found.
+     * @return page with information about success adding item to lost and found or page for adding new lost item
+     * if user entered invalid data.
+     */
     @PostMapping
     public String add(@Valid LostItem lostItem,
+                      @RequestParam Long place,
+                      @RequestParam Long type,
+                      @RequestParam Long assessedValue,
                       @RequestParam(required = false) MultipartFile file,
                       String stringTime,
                       Model model) throws IOException {
+
+        if (place == -1 || type == -1 || assessedValue == -1) {
+            if (place == -1) model.addAttribute("message", "You must choose place");
+            else if (type == -1) model.addAttribute("message", "You must choose type");
+            else model.addAttribute("message", "You must choose assessed value");
+
+            model.addAttribute("places", placeService.findAll());
+            model.addAttribute("types", typeService.findAll());
+            model.addAttribute("assessedValues", assessedValueService.findAll());
+
+            return "item/addItem";
+        }
 
         addFile(lostItem, file);
 
@@ -74,6 +131,35 @@ public class MainController {
         return "information/printAdd";
     }
 
+    /**
+     * Opens page for editing item.
+     * @param lostItem item that will be edited.
+     * @return page of editing item.
+     */
+    @GetMapping("/edit/{lostItem}")
+    public String editItem(@PathVariable LostItem lostItem,
+                           Model model) {
+        model.addAttribute("item", lostItem);
+        model.addAttribute("places", placeService.findAll());
+        model.addAttribute("types", typeService.findAll());
+        model.addAttribute("assessedValues", assessedValueService.findAll());
+
+        return "item/editItem";
+    }
+
+    /**
+     * Edits lost item.
+     * @param item item that will be edited.
+     * @param name new name for item.
+     * @param quantity new quantity for item.
+     * @param place new place for item.
+     * @param type new type for item.
+     * @param assessedValue new assessed value for item.
+     * @param date new date for item.
+     * @param stringTime new time represents in string for item.
+     * @param file new image for item.
+     * @return main page with information about success editing item.
+     */
     @PostMapping("/edited/{item}")
     public String edit(@PathVariable LostItem item,
                        @RequestParam(required = false) String name,
@@ -103,6 +189,11 @@ public class MainController {
         return "item/main";
     }
 
+    /**
+     * Configures filename for files.
+     * @param lostItem item for file.
+     * @param file uploading file.
+     */
     private void addFile(LostItem lostItem, MultipartFile file) throws IOException {
         if (file != null && !file.getOriginalFilename().isEmpty()) {
             File uploadPath = new File(this.uploadPath);
@@ -120,6 +211,11 @@ public class MainController {
         }
     }
 
+    /**
+     * Deletes item.
+     * @param id if of item that must be deleted.
+     * @return page with information about success deleting item.
+     */
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable Long id,
                          Model model) {
@@ -131,18 +227,5 @@ public class MainController {
         lostItemService.deleteById(id);
 
         return "information/print";
-    }
-
-
-
-    @GetMapping("/edit/{lostItem}")
-    public String editItem(@PathVariable LostItem lostItem,
-                           Model model) {
-        model.addAttribute("item", lostItem);
-        model.addAttribute("places", placeService.findAll());
-        model.addAttribute("types", typeService.findAll());
-        model.addAttribute("assessedValues", assessedValueService.findAll());
-
-        return "item/editItem";
     }
 }

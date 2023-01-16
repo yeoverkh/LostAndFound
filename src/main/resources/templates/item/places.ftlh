@@ -42,15 +42,15 @@
                     <form method="post" action="/places/edit/${place.getId()}">
                         <div class="input-group">
                             <input type="text" placeholder="${place.getAddress()}"
-                                   class="form-control" name="address">
+                                   class="form-control" name="address"/>
                             <input style="max-width: 80px" type="text" placeholder="${place.getLatitude()}"
-                                   class="form-control" name="latitude">
+                                   class="form-control" name="latitude"/>
                             <input style="max-width: 80px" type="text" placeholder="${place.getLongitude()}"
-                                   class="form-control" name="longitude">
+                                   class="form-control" name="longitude"/>
                         </div>
                         <input type="text" placeholder="${place.getShortDescription()}"
-                               class="form-control" name="shortDescription">
-                        <input type="hidden" name="_csrf" value="${_csrf.token}">
+                               class="form-control" name="shortDescription"/>
+                        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                         <button class="btn btn-success align-middle" type="submit" id="button-addon1">
                             Update
                         </button>
@@ -59,7 +59,7 @@
                 <td style="max-width: 60px">
                     <div>
                         <form method="post" action="/places/delete/${place.getId()}">
-                            <input type="hidden" name="_csrf" value="${_csrf.token}">
+                            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                             <button class="btn btn-danger" type="submit">Delete</button>
                         </form>
                     </div>

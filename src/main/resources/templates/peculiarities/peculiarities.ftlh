@@ -3,6 +3,7 @@
 <@c.page>
     <h2>Peculiarities</h2>
 
+
     <a class="btn btn-success mb-2" href="/peculiarities/add" role="button">
         Add new peculiarities
     </a>
@@ -42,18 +43,18 @@
                     <form method="post" action="/peculiarities/edit/${peculiarity.getId()}">
                         <div class="input-group">
                             <input type="text" placeholder="${peculiarity.getName()}"
-                                   class="form-control" name="name">
+                                   class="form-control" name="name"/>
                             <input type="text" placeholder="${peculiarity.getValue()}"
-                                   class="form-control" name="value">
+                                   class="form-control" name="value"/>
                             <select class="form-control" id="unit" name="unit" aria-label="Default select">
-                                <option selected value="-1">Select unit</option>
+                                <option selected="selected" value="-1">Select unit</option>
                                 <#list units as unit>
                                     <option value="${unit.getId()}">
                                         ${unit.getName()}
                                     </option>
                                 </#list>
                             </select>
-                            <input type="hidden" name="_csrf" value="${_csrf.token}">
+                            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                             <button class="btn btn-success align-middle" type="submit" id="button-addon1">
                                 Update
                             </button>
@@ -63,7 +64,7 @@
                 <td style="max-width: 60px">
                     <div>
                         <form method="post" action="/peculiarities/delete/${peculiarity.getId()}">
-                            <input type="hidden" name="_csrf" value="${_csrf.token}">
+                            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                             <button class="btn btn-danger" type="submit">Delete</button>
                         </form>
                     </div>
@@ -94,8 +95,7 @@
             <form method="post" action="/peculiarities/units">
 
                 <div class="form-group">
-                    <input type="text" class="form-control col-sm-3 ${(nameError??)?string('is-invalid', '')}"
-                           name="name" placeholder="Name">
+                    <input type="text" class="form-control col-sm-3" name="name" placeholder="Name" required/>
                     <#if nameError??>
                         <div class="invalid-feedback">
                             ${nameError}
@@ -103,7 +103,7 @@
                     </#if>
                 </div>
 
-                <input type="hidden" name="_csrf" value="${_csrf.token}">
+                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-success">Add</button>
@@ -142,8 +142,8 @@
                     <form method="post" action="/peculiarities/units/edit/${unit.getId()}">
                         <div class="input-group">
                             <input type="text" placeholder="${unit.getName()}"
-                                   class="form-control" name="name">
-                            <input type="hidden" name="_csrf" value="${_csrf.token}">
+                                   class="form-control" name="name"/>
+                            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                             <button class="btn btn-success align-middle" type="submit" id="button-addon1">
                                 Update
                             </button>
@@ -153,7 +153,7 @@
                 <td style="max-width: 40px">
                     <div>
                         <form method="post" action="/peculiarities/units/delete/${unit.getId()}">
-                            <input type="hidden" name="_csrf" value="${_csrf.token}">
+                            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                             <button class="btn btn-danger" type="submit">Delete</button>
                         </form>
                     </div>

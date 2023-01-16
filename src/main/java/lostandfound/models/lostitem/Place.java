@@ -4,6 +4,11 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Class that represents place in which was found lost item.
+ * A lot of items may be found in one place.
+ * Every item have only one place.
+ */
 @Entity
 public class Place {
 

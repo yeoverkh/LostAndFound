@@ -13,13 +13,12 @@
             <form method="post" action="/values">
 
                 <div class="form-group">
-                    <input type="text" class="form-control col-sm-3"
-                           name="value" placeholder="Value">
+                    <input type="text" class="form-control col-sm-3" name="value" placeholder="Value" required/>
                 </div>
 
                 <div class="form-group">
                     <select class="form-control col-sm-3" id="currency" name="currency" aria-label="Default select">
-                        <option selected>Select currency</option>
+                        <option selected="selected" value="-1">Select currency</option>
                         <#list currencies as currency>
                             <option value="${currency.getId()}">
                                 ${currency.getName()}
@@ -28,7 +27,7 @@
                     </select>
                 </div>
 
-                <input type="hidden" name="_csrf" value="${_csrf.token}">
+                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-success">Add</button>
@@ -36,6 +35,12 @@
             </form>
         </div>
     </div>
+
+    <#if isEmpty??>
+        <div class="alert alert-danger" role="alert">
+            You can not add new assessed value without currency.
+        </div>
+    </#if>
 
     <#if message??>
         <div class="alert alert-${message}" role="alert">
@@ -69,16 +74,16 @@
                     <form method="post" action="/values/edit/${value.getId()}">
                         <div class="input-group">
                             <input type="text" placeholder="${value.getValue()}"
-                                   style="max-width: 100px" class="form-control" name="value">
+                                   style="max-width: 100px" class="form-control" name="value"/>
                             <select class="form-control" id="currency" name="currency" aria-label="Default select">
-                                <option selected value="-1">Select currency</option>
+                                <option selected="selected" value="-1">Select currency</option>
                                 <#list currencies as currency>
                                     <option value="${currency.getId()}">
                                         ${currency.getName()}
                                     </option>
                                 </#list>
                             </select>
-                            <input type="hidden" name="_csrf" value="${_csrf.token}">
+                            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                             <button class="btn btn-success align-middle" type="submit" id="button-addon1">
                                 Update
                             </button>
@@ -88,7 +93,7 @@
                 <td style="max-width: 35px">
                     <div>
                         <form method="post" action="/values/delete/${value.getId()}">
-                            <input type="hidden" name="_csrf" value="${_csrf.token}">
+                            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                             <button class="btn btn-danger" type="submit">Delete</button>
                         </form>
                     </div>
@@ -114,11 +119,10 @@
             <form method="post" action="/values/currencies">
 
                 <div class="form-group">
-                    <input type="text" class="form-control col-sm-3"
-                           name="name" placeholder="Name">
+                    <input type="text" class="form-control col-sm-3" name="name" placeholder="Name" required/>
                 </div>
 
-                <input type="hidden" name="_csrf" value="${_csrf.token}">
+                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-success">Add</button>
@@ -157,9 +161,8 @@
                 <td style="max-width: 100px">
                     <form method="post" action="/values/currencies/edit/${currency.getId()}">
                         <div class="input-group">
-                            <input type="text" placeholder="${currency.getName()}"
-                                   class="form-control" name="name">
-                            <input type="hidden" name="_csrf" value="${_csrf.token}">
+                            <input type="text" placeholder="${currency.getName()}" class="form-control" name="name"/>
+                            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                             <button class="btn btn-success align-middle" type="submit" id="button-addon1">
                                 Update
                             </button>
@@ -169,7 +172,7 @@
                 <td style="max-width: 50px">
                     <div>
                         <form method="post" action="/values/currencies/delete/${currency.getId()}">
-                            <input type="hidden" name="_csrf" value="${_csrf.token}">
+                            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                             <button class="btn btn-danger" type="submit">Delete</button>
                         </form>
                     </div>

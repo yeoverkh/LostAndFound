@@ -4,6 +4,11 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
+/**
+ * Class that represents unit for peculiarities.
+ * A lot of peculiarities may have one unit.
+ * Some peculiarities must have only one unit.
+ */
 @Entity
 public class Unit {
 

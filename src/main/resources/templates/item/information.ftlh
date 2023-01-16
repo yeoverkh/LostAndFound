@@ -25,7 +25,7 @@
                 <td style="max-width: 60px">
                     <div>
                         <form method="post" action="/information/${item.getId()}/remove/${peculiarity.getId()}">
-                            <input type="hidden" name="_csrf" value="${_csrf.token}">
+                            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
 
                             <button class="btn btn-danger" type="submit">Remove</button>
                         </form>
@@ -57,7 +57,7 @@
                 <td style="max-width: 60px">
                     <div>
                         <form method="post" action="/information/${item.getId()}/add/${peculiarity.getId()}">
-                            <input type="hidden" name="_csrf" value="${_csrf.token}">
+                            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
 
                             <button class="btn btn-success" type="submit">Add</button>
                         </form>

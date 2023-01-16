@@ -12,19 +12,38 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
+/**
+ * Controller for currencies mappings
+ */
 @Controller
-@RequestMapping("/values")
+@RequestMapping("/values/currencies")
 public class CurrencyController {
 
-    private final CurrencyService currencyService;
+    /**
+     * Service that works with assessed values.
+     */
     private final AssessedValueService assessedValueService;
 
-    public CurrencyController(CurrencyService currencyService, AssessedValueService assessedValueService) {
-        this.currencyService = currencyService;
+    /**
+     * Service that works with currencies.
+     */
+    private final CurrencyService currencyService;
+
+    /**
+     * Default constructor that auto wires dependencies.
+     */
+    public CurrencyController(AssessedValueService assessedValueService, CurrencyService currencyService) {
+
         this.assessedValueService = assessedValueService;
+        this.currencyService = currencyService;
     }
 
-    @PostMapping("/currencies")
+    /**
+     * Adds new currency.
+     * @param currency currency that must be added to database.
+     * @return page with all assessed values and currencies with information about success adding new currency.
+     */
+    @PostMapping
     public String addCurrency(@Valid Currency currency,
                               Model model) {
 
@@ -32,13 +51,18 @@ public class CurrencyController {
 
         model.addAttribute("messageCurrency", "success");
 
-        model.addAttribute("values", assessedValueService.findAll());
-        model.addAttribute("currencies", currencyService.findAll());
+        addValuesAndCurrencies(model);
 
         return "item/assessedValues";
     }
 
-    @PostMapping("/currencies/edit/{id}")
+    /**
+     * Edits currency.
+     * @param id input Long id of currency that must be edited.
+     * @param name input String new name of currency, nullable.
+     * @return page with all assessed values and currencies with information about success editing currency.
+     */
+    @PostMapping("/edit/{id}")
     public String editCurrency(@PathVariable Long id,
                                @RequestParam(required = false) String name,
                                Model model) {
@@ -51,13 +75,17 @@ public class CurrencyController {
 
         model.addAttribute("messageCurrency", "info");
 
-        model.addAttribute("values", assessedValueService.findAll());
-        model.addAttribute("currencies", currencyService.findAll());
+        addValuesAndCurrencies(model);
 
         return "item/assessedValues";
     }
 
-    @PostMapping("/currencies/delete/{id}")
+    /**
+     * Deletes currency.
+     * @param id input Long id of currency that must be deleted.
+     * @return page with all assessed values and currencies with information about success deleting currency.
+     */
+    @PostMapping("/delete/{id}")
     public String deleteCurrency(@PathVariable Long id,
                                  Model model) {
 
@@ -65,9 +93,16 @@ public class CurrencyController {
 
         model.addAttribute("messageCurrency", "danger");
 
-        model.addAttribute("values", assessedValueService.findAll());
-        model.addAttribute("currencies", currencyService.findAll());
+        addValuesAndCurrencies(model);
 
         return "item/assessedValues";
+    }
+
+    /**
+     * Added to page values and currencies.
+     */
+    private void addValuesAndCurrencies(Model model) {
+        model.addAttribute("values", assessedValueService.findAll());
+        model.addAttribute("currencies", currencyService.findAll());
     }
 }
