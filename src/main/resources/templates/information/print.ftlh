@@ -5,7 +5,7 @@
     <h2>${lostItem.getName()} found its owner!</h2>
 
     <#if lostItem.getFilename()??>
-        <img class="img-fluid rounded-start" style="max-width: 400px" src="/img/${lostItem.getFilename()}">
+        <img class="img-fluid rounded-start" style="max-width: 400px" src="/img/${lostItem.getFilename()}"/>
     </#if>
 
     <h3>In quantity: ${lostItem.getQuantity()}</h3>
@@ -25,14 +25,12 @@
     <br/>
 
     <div class="input-group my-1">
-        <input type="text" placeholder="Name"
-               class="form-control" name="name">
-        <input type="text" placeholder="Surname"
-               class="form-control" name="surname">
+        <input type="text" placeholder="Name" class="form-control" name="name"/>
+        <input type="text" placeholder="Surname" class="form-control" name="surname"/>
     </div>
 
     <br/>
     <br/>
 
-    <input class="btn btn-info d-print-none" type="button" value="Print" onclick="print()">
+    <input class="btn btn-info d-print-none" type="button" value="Print" onclick="print()"/>
 </@c.page>

@@ -19,35 +19,36 @@
 
 
     <div class="row justify-content-start mb-2 mx-1">
-    <div>
-        <h5>Sort by</h5>
+        <div>
+            <h5>Sort by</h5>
 
-        <form method="post" action="/main/sort">
-            <select class="form-control mb-2" name="value">
-                <option selected>Choose sort value</option>
-                <option value="assessedValue">Assessed value</option>
-                <option value="date">Date</option>
-                <option value="quantity">Quantity</option>
-            </select>
+            <form method="post" action="/main/sort">
+                <select class="form-control mb-2" name="value">
+                    <option selected="selected">Choose sort value</option>
+                    <option value="assessedValue">Assessed value</option>
+                    <option value="date">Date</option>
+                    <option value="quantity">Quantity</option>
+                </select>
 
-            <select class="form-control mb-2" name="sortType">
-                <option selected>Choose sort type</option>
-                <option value="ascending">Ascending</option>
-                <option value="descending">Descending</option>
-            </select>
+                <select class="form-control mb-2" name="sortType">
+                    <option selected="selected">Choose sort type</option>
+                    <option value="ascending">Ascending</option>
+                    <option value="descending">Descending</option>
+                </select>
 
-            <input type="hidden" name="_csrf" value="${_csrf.token}">
+                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
 
-            <button class="btn btn-primary" type="submit">Sort</button>
-        </form>
-    </div>
-    <div class="mx-5">
-        <h5>Search</h5>
-        <form method="post" action="/main/search">
-            <input class="form-control mb-2" type="text" name="search" placeholder="Search by name">
-            <input type="hidden" name="_csrf" value="${_csrf.token}">
-            <button type="submit" class="btn btn-primary">Search</button>
-        </form>
+                <button class="btn btn-primary" type="submit">Sort</button>
+            </form>
+        </div>
+        <div class="mx-5">
+            <h5>Search</h5>
+            <form method="post" action="/main/search">
+                <input class="form-control mb-2" type="text" name="search" placeholder="Search by name"/>
+                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
     </div>
 
 
@@ -109,7 +110,7 @@
                             </a>
 
                             <form method="post" action="/main/delete/${item.id}">
-                                <input type="hidden" name="_csrf" value="${_csrf.token}">
+                                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                                 <button style="max-height: 40px" class="btn btn-danger" type="submit">Delete
                                 </button>
                             </form>
@@ -118,7 +119,7 @@
                 </div>
             </div>
         <#else>
-            No items yet
+            <h6>No items yet</h6>
         </#list>
     </div>
 

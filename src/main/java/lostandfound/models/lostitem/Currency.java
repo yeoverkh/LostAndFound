@@ -4,6 +4,11 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Class that represents currency for assessed value.
+ * A lot of assessed values may have one currency.
+ * Every assessed value must have only one currency.
+ */
 @Entity
 public class Currency {
 

@@ -4,6 +4,11 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Class that represents assessed value for item.
+ * A lot of items may have one assessed value.
+ * Every item must have only one assessed value.
+ */
 @Entity
 public class AssessedValue {
 
@@ -21,6 +26,11 @@ public class AssessedValue {
     private Set<LostItem> set = new HashSet<>();
 
     public AssessedValue() {
+    }
+
+    public AssessedValue(Double value, Currency currency) {
+        this.value = value;
+        this.currency = currency;
     }
 
     public Long getId() {

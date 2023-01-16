@@ -13,11 +13,10 @@
             <form method="post" action="/types">
 
                 <div class="form-group">
-                    <input type="text" class="form-control col-sm-3"
-                           name="name" placeholder="Name">
+                    <input type="text" class="form-control col-sm-3" name="name" placeholder="Name" required/>
                 </div>
 
-                <input type="hidden" name="_csrf" value="${_csrf.token}">
+                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-success">Add</button>
@@ -56,8 +55,8 @@
                     <form method="post" action="/types/edit/${type.getId()}">
                         <div class="input-group">
                             <input type="text" placeholder="${type.getName()}"
-                                   class="form-control" name="name">
-                            <input type="hidden" name="_csrf" value="${_csrf.token}">
+                                   class="form-control" name="name"/>
+                            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                             <button class="btn btn-success align-middle" type="submit" id="button-addon1">
                                 Update
                             </button>
@@ -67,7 +66,7 @@
                 <td style="max-width: 40px">
                     <div>
                         <form method="post" action="/types/delete/${type.getId()}">
-                            <input type="hidden" name="_csrf" value="${_csrf.token}">
+                            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                             <button class="btn btn-danger" type="submit">Delete</button>
                         </form>
                     </div>

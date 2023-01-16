@@ -11,6 +11,9 @@ import java.sql.Time;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Class that represents lost item.
+ */
 @Entity
 public class LostItem {
 
@@ -22,12 +25,10 @@ public class LostItem {
     @Length(max = 255, message = "Name too long (more than 255 chars)")
     private String name;
 
-    @NotNull(message = "Item must be located somewhere")
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "place_id")
     private Place place;
 
-    @NotNull(message = "Lost item must have type")
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "type_id")
     private Type type;
