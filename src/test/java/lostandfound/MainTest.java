@@ -44,4 +44,34 @@ public class MainTest {
                 .andDo(print())
                 .andExpect(xpath("/html/body/div/div[2]/h6").string("No items yet"));
     }
+
+    @Test
+    public void emptyPlacesTest() throws Exception {
+        mockMvc.perform(get("/places"))
+                .andDo(print())
+                .andExpect(xpath("/html/body/div/h6").string("No places yet"));
+    }
+
+    @Test
+    public void emptyTypesTest() throws Exception {
+        mockMvc.perform(get("/types"))
+                .andDo(print())
+                .andExpect(xpath("/html/body/div/h6").string("No types yet"));
+    }
+
+    @Test
+    public void emptyValuesTest() throws Exception {
+        mockMvc.perform(get("/values"))
+                .andDo(print())
+                .andExpect(xpath("/html/body/div/h6[1]").string("No assessed values yet"))
+                .andExpect(xpath("/html/body/div/h6[2]").string("No currencies yet"));
+    }
+
+    @Test
+    public void emptyPeculiaritiesTest() throws Exception {
+        mockMvc.perform(get("/peculiarities"))
+                .andDo(print())
+                .andExpect(xpath("/html/body/div/h6[1]").string("No peculiarities yet"))
+                .andExpect(xpath("/html/body/div/h6[2]").string("No units yet"));
+    }
 }

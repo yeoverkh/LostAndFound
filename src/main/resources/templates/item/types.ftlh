@@ -13,7 +13,7 @@
             <form method="post" action="/types">
 
                 <div class="form-group">
-                    <input type="text" class="form-control col-sm-3" name="name" placeholder="Name" required/>
+                    <input type="text" class="form-control col-sm-3" name="name" placeholder="Name" required="required"/>
                 </div>
 
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
@@ -37,43 +37,46 @@
         </div>
     </#if>
 
-    <table class="table table-striped table-bordered table-hover" style="max-width: 600px">
+    <#if types?size != 0>
+        <table class="table table-striped table-bordered table-hover" style="max-width: 600px">
 
-        <thead class="thead-light">
-        <tr>
-            <th class="align-middle" scope="col" style="max-width: 0">Name</th>
-            <th style="max-width: 0"></th>
-            <th style="max-width: 0"></th>
-        </tr>
-        </thead>
-
-        <tbody>
-        <#list types as type>
+            <thead class="thead-light">
             <tr>
-                <td class="align-middle">${type.getName()}</td>
-                <td style="max-width: 100px">
-                    <form method="post" action="/types/edit/${type.getId()}">
-                        <div class="input-group">
-                            <input type="text" placeholder="${type.getName()}"
-                                   class="form-control" name="name"/>
-                            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-                            <button class="btn btn-success align-middle" type="submit" id="button-addon1">
-                                Update
-                            </button>
-                        </div>
-                    </form>
-                </td>
-                <td style="max-width: 40px">
-                    <div>
-                        <form method="post" action="/types/delete/${type.getId()}">
-                            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-                            <button class="btn btn-danger" type="submit">Delete</button>
-                        </form>
-                    </div>
-                </td>
+                <th class="align-middle" scope="col" style="max-width: 0">Name</th>
+                <th style="max-width: 0"></th>
+                <th style="max-width: 0"></th>
             </tr>
-        </#list>
-        </tbody>
+            </thead>
 
-    </table>
+            <tbody>
+            <#list types as type>
+                <tr>
+                    <td class="align-middle">${type.getName()}</td>
+                    <td style="max-width: 100px">
+                        <form method="post" action="/types/edit/${type.getId()}">
+                            <div class="input-group">
+                                <input type="text" placeholder="${type.getName()}"
+                                       class="form-control" name="name"/>
+                                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                                <button class="btn btn-success align-middle" type="submit" id="button-addon1">
+                                    Update
+                                </button>
+                            </div>
+                        </form>
+                    </td>
+                    <td style="max-width: 40px">
+                        <div>
+                            <form method="post" action="/types/delete/${type.getId()}">
+                                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                                <button class="btn btn-danger" type="submit">Delete</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            </#list>
+            </tbody>
+        </table>
+    <#else>
+        <h6>No types yet</h6>
+    </#if>
 </@c.page>
