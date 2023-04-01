@@ -7,3 +7,6 @@ After adding this project to your local repository you need:
 - After first run of the application you need to change variable spring.jpa.hibernate.ddl-auto in application.properties file on value "validate" or your database will always working only for one run;
 
 In this project you can see realization of work "Lost and found" that finds items and saves its with all characteristics: place where item was lost, assessed value, type of this item and peculiarities that realizes relationship many-to-many with lost items.
+
+## Here you can see database diagram
+![](diagram.png)
